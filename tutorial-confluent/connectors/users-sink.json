@@ -1,0 +1,11 @@
+{
+  "name": "sink-users",
+  "config": {
+    "connector.class": "FileStreamSink",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "topics": "users",
+    "tasks.max": "1",
+    "file": "/home/eost/tutorial-confluent/connectors/users.data"
+  }
+}

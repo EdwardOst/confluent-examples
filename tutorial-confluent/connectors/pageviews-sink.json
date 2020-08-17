@@ -1,0 +1,11 @@
+{
+  "name": "sink-pageviews",
+  "config": {
+    "connector.class": "FileStreamSink",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "topics": "pageviews",
+    "tasks.max": "1",
+    "file": "/home/eost/tutorial-confluent/connectors/pageviews.data"
+  }
+}
