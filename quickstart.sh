@@ -63,8 +63,8 @@ EOF-REQUEST
   echo "${request}" >&2
   curl -X POST "${kafka_connect_connectors_endpoint}" \
        -H "Content-Type: application/json" \
-       --trace-ascii "create_datagen_connector-${topic}.log" \
        --data-binary "${request}"
+#       --trace-ascii "create_datagen_connector-${topic}.log" \
 
 }
 
@@ -123,8 +123,8 @@ EOF-REQUEST
   echo "${request}" >&2
   curl -X POST "${kafka_connect_connectors_endpoint}" \
        -H "Content-Type: application/json" \
-       --trace-ascii "create_camel_file_sink_connector-${topic}.log" \
        --data-binary "${request}"
+#       --trace-ascii "create_camel_file_sink_connector-${topic}.log" \
 
 }
 
@@ -152,8 +152,8 @@ EOF-REQUEST
   echo "${request}" >&2
   curl -X POST "${kafka_connect_connectors_endpoint}" \
        -H "Content-Type: application/json" \
-       --trace-ascii "create_camel_log_sink_connector-${topic}.log" \
        --data-binary "${request}"
+#       --trace-ascii "create_camel_log_sink_connector-${topic}.log" \
 
 }
 
@@ -206,6 +206,7 @@ EOF-KSQL
 function quickstart_main() {
   create_topic users
   create_topic pageviews
+
   create_datagen_connector "users"
   create_datagen_connector "pageviews"
 

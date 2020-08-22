@@ -64,6 +64,11 @@ function install_confluent_cli() {
 }
 
 
+function install_datagen() {
+  confluent-hub install --no-prompt confluentinc/kafka-connect-datagen:latest
+}
+
+
 function install_confluent_main() {
 
   mkdir -p "${CONFLUENT_HOME_PARENT_DIR}"
@@ -73,6 +78,8 @@ function install_confluent_main() {
 
   # shellcheck disable=SC1091
   source "/etc/profile.d/confluent.sh"
+
+  install_datagen
 
   install_confluent_cli "${CONFLUENT_CLI_VERSION}"
 
