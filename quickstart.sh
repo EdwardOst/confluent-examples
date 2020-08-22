@@ -203,7 +203,7 @@ EOF-KSQL
 }
 
 
-function quickstart_test() {
+function quickstart_main() {
   create_topic users
   create_topic pageviews
   create_datagen_connector "users"
@@ -225,16 +225,7 @@ function quickstart_test() {
 }
 
 
-if [[ "${QUICKSTART_TEST:+x}" != x ]]; then
-  export -f create_topic
-  export -f create_datagen_connector
-  export -f create_file_sink_connector
-  export -f create_camel_file_sink_connector
-  export -f create_camel_log_sink_connector
-  export -f ksql_script
-  echo "quickstart functions declared" >&2
-else
-  quickstart_test
-fi
+quickstart_main
+
 
 eval "${quickstart_oldSetOptions}" 2> /dev/null
