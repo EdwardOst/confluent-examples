@@ -1,0 +1,11 @@
+{
+  "name": "camel-log-sink-users",
+  "config": {
+    "connector.class": "org.apache.camel.kafkaconnector.log.CamelLogSinkConnector",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "topics": "users",
+    "tasks.max": "1",
+    "camel.sink.path.loggerName": "camel-kafka-connect-log-users"
+  }
+}
