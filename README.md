@@ -24,5 +24,6 @@ install_camel_kafka_connect_main
 confluent local start
 
 # Run quickstart scripts to create datagen and Camel Connectors.  ksql example script is included but not run.
-quickstart.sh
+source quickstart.sh
+quickstart_main
 ````
