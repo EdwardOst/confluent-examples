@@ -1,31 +1,5 @@
 #!/usr/bin/env bash
 
-[ "${QUICKSTART_FLAG:-0}" -gt 0 ] && return 0
-
-quickstart_oldSetOptions=$(set +o)
-
-set -euo pipefail
-
-# shellcheck disable=SC2155
-declare -r quickstart_script_path=$(readlink -e "${BASH_SOURCE[0]}")
-# shellcheck disable=SC2034
-declare -r quickstart_script_dir="${quickstart_script_path%/*}"
-
-# assumes kafka has been started
-
-declare -r kafka_host="localhost"
-declare -r kafka_port="9092"
-declare -r kafka_connect_protocol="http"
-declare -r kafka_connect_host="localhost"
-declare -r kafka_connect_port="8083"
-declare -r kafka_connect_connector_path="connectors"
-declare -r kafka_connect_base_url="${kafka_connect_protocol}://${kafka_connect_host}:${kafka_connect_port}"
-declare -r kafka_connect_connectors_endpoint="${kafka_connect_base_url}/${kafka_connect_connector_path}"
-declare -r sink_data_dir="${HOME}/connect/sink"
-# assumes kafka-topics is on the path
-declare -r kafka_topics_command="kafka-topics"
-# assumes ksql is on the path
-declare -r ksql_command="ksql"
 
 function create_topic() {
   local topic="${1?: empty or not set}"
@@ -204,6 +178,22 @@ EOF-KSQL
 
 
 function quickstart_main() {
+  # assumes kafka has been started
+
+  local -r kafka_host="localhost"
+  local -r kafka_port="9092"
+  local -r kafka_connect_protocol="http"
+  local -r kafka_connect_host="localhost"
+  local -r kafka_connect_port="8083"
+  local -r kafka_connect_connector_path="connectors"
+  local -r kafka_connect_base_url="${kafka_connect_protocol}://${kafka_connect_host}:${kafka_connect_port}"
+  local -r kafka_connect_connectors_endpoint="${kafka_connect_base_url}/${kafka_connect_connector_path}"
+  local -r sink_data_dir="${HOME}/connect/sink"
+  # assumes kafka-topics is on the path
+  local -r kafka_topics_command="kafka-topics"
+  # assumes ksql is on the path
+  local -r ksql_command="ksql"
+
   create_topic users
   create_topic pageviews
 
@@ -219,14 +209,18 @@ function quickstart_main() {
   create_camel_log_sink_connector "users"
 
   local confluent_current_dir
-  confluent_current_dir="$(confluent local current)"
+  confluent_current_dir="$(confluent local current 2> /dev/null)"
+
   echo "view camel_file_sink_connector results in the '${sink_data_dir}' directory"
   echo "view camel_log_sink_connector results in the '${confluent_current_dir}/connect/logs' directory"
 
 }
 
 
-quickstart_main
 
+# wrap function invocation with bash shell options in subshell
+function test_quickstart_main() (
+  set -euo pipefail
 
-eval "${quickstart_oldSetOptions}" 2> /dev/null
+  quickstart_main
+)

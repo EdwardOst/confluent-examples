@@ -13,10 +13,15 @@ Usage:
 
 ````bash
 # Install Confluent
-install_confluent.sh
+source install_confluent.sh
+install_confluent_main
 
 # Install Camel Kafka Connect Components
-install_camel_kafka_connect.sh
+source install_camel_kafka_connect.sh
+install_camel_kafka_connect_main
+
+# start confluent server in local mode
+confluent local start
 
 # Run quickstart scripts to create datagen and Camel Connectors.  ksql example script is included but not run.
 quickstart.sh
