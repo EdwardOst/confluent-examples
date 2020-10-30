@@ -41,14 +41,15 @@ quickstart_main
 ````
 
 
-In Control Center, navigate to your Connect -> your connect cluster (connect-default) and observe the four connectors created.
-There are are two datagen sources and two file sinks. Drill into each source or sink and then view the Settings.
+In Control Center, navigate to your Connect -> your connect cluster (connect-default) and observe the six connectors created.
+There are are two datagen sources, two file sinks, and two camel connect sinks.
+Drill into each source or sink and then view the Settings.
 They should match the json file configurations above.
 
 Navigate to the top level Topics in Control Center. Observe the users and pageviews topics.
 There are separate tabs for Messages as well as topic level Schemas. 
 Click on the Schemas tab and observe that it is empty since we did not assign a schema to this topic.
 
-Drill into the topics and view the Messagess tab.
+Drill into the topics Messages tab.
 Note that message content has both key and value portions, and that the value portion is further divided into schema
 and payload. The messages have been inspected and an anonymous schema inferred for that specific message.
